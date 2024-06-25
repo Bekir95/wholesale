@@ -1,0 +1,145 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load extras %}
+
+{% block content %}
+
+<div style="width: 100%; padding-top: 100px;">
+    
+</div>
+
+<div class="promo-container">
+    <div class="promo-banner">
+        <div class="promo-inner">
+            <h2 class="h3">Special Deals Waiting!</h2>
+            <p style="margin-top: 15px; margin-left: 15px; font-size: 20px; font-weight: 500;">Discover. Stock and Rise with SURELY HUB</p>
+        </div>
+    </div>
+</div>
+
+<div style="height: 25px;"></div>
+<hr/>
+
+
+  
+
+<div class="product-container">
+    <div class="product-container-2">
+        <div class="product-grid">
+            <!--
+            <div class="product-grid-left">
+
+            </div>
+            -->
+            <div class="product-grid-right">
+                <div class="deals-products">
+                    <div class="deals-grid">
+
+                        <div id="modal-div"></div>
+
+                        
+
+                        {% for product in products%}
+                            <!-- Here we create this empty div for inserting modal -->
+                            <!-- Large modal -->
+                            
+
+                            
+
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top open-modal" data-url="{% url 'modal' pk=product.asin %}" src="{% static product.image%}" alt="Card image cap">
+                                <div class="card-body">
+                                <p style="hyphens: auto;word-break: break-word; height: 150px;" class="card-text">{{product.title}}</p>
+                                <p class="asin">{{product.asin}}</p>
+                                <div class="grid-price">
+                                    {% if product.deal > 0 %}
+                                        <span class="grid-product-price">
+                                            <span hidewlm>
+                                                ${% sub_values_get_int  product.price product.deal %}
+                                                <sup>{% sub_values_get_float  product.price product.deal %}</sup>
+                                            </span>
+                                        </span>
+                                        <span class="grid-product-price-original">
+                                            <span hidewlm>
+                                                ${{product.price|get_int}}
+                                                <sup>{{product.price|get_float}}</sup>
+                                            </span>
+                                        </span>
+                                        <span class="grid-product-price-savings">
+                                            <span>
+                                                
+                                                Save 
+                                                <span hidewlm>${{product.deal}}</span>
+                                            </span>
+                                        </span>
+                                    {% else %}
+                                        <span class="grid-product-price">
+                                            <span hidewlm>
+                                                ${{product.price|get_int}}
+                                                <sup>{{product.price|get_float}}</sup>
+                                            </span>
+                                        </span>
+                                    {% endif %}
+                                    
+
+                                </div>
+                            </div>
+                            </div>
+                        {% endfor %}
+                        {% for product in products%}
+                        
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" src="{% static product.image%}" alt="Card image cap">
+                                <div class="card-body">
+                                <p style="hyphens: auto;word-break: break-word; height: 150px;" class="card-text">{{product.title}}</p>
+                                <p class="asin">{{product.asin}}</p>
+                                <div class="grid-price">
+                                    {% if product.deal > 0 %}
+                                        <span class="grid-product-price">
+                                            <span hidewlm>
+                                                ${% sub_values_get_int  product.price product.deal %}
+                                                <sup>{% sub_values_get_float  product.price product.deal %}</sup>
+                                            </span>
+                                        </span>
+                                        <span class="grid-product-price-original">
+                                            <span hidewlm>
+                                                ${{product.price|get_int}}
+                                                <sup>{{product.price|get_float}}</sup>
+                                            </span>
+                                        </span>
+                                        <span class="grid-product-price-savings">
+                                            <span>
+                                                
+                                                Save 
+                                                <span hidewlm>${{product.deal}}</span>
+                                            </span>
+                                        </span>
+                                    {% else %}
+                                        <span class="grid-product-price">
+                                            <span hidewlm>
+                                                ${{product.price|get_int}}
+                                                <sup>{{product.price|get_float}}</sup>
+                                            </span>
+                                        </span>
+                                    {% endif %}
+                                    
+
+                                </div>
+                            </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="height: 2000px"></div>
+
+<script src="{% static 'js/jquery-3.7.1.min.js'%}"></script>
+
+
+{% endblock content%}
+
+

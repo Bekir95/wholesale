@@ -1,0 +1,186 @@
+{% load static %}
+{% load extras %}
+
+<!-- Large modal -->
+              
+
+<div style=" width: 2000px;" id="myEdit" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        {% csrf_token %}
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">ASIN DETAILS</h5>
+            </div>
+            <div class="modal-body" >
+                <div class="detail-container row">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <img style="width: 75px; height: auto;" src="{% static product.image%}" alt="Image cap">
+                            </div>
+                            <div class="col">
+                                <p style="hyphens: auto;word-break: break-word;" class="card-text">Asin : {{product.asin}}</p>
+                            </div>
+                            <div class="col">
+                                <p style="hyphens: auto;word-break: break-word;" class="card-text">Price : {{product.price}}</p>
+                            </div>
+                            <div class="col">
+                                <p style="hyphens: auto;word-break: break-word;" class="card-text">MOQ : 250</p>
+                            </div>
+                            <div class="col">
+                                <p style="hyphens: auto;word-break: break-word;" class="card-text">Lead Time : 2 Hafta</p>
+                            </div>
+                        </div>
+
+                    </div>
+                
+                </div>
+                <ul style="padding-top: 10px;" class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="us-tab" data-bs-toggle="tab" data-bs-target="#us" type="button" role="tab" aria-controls="us" aria-selected="true">USA</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="ca-tab" data-bs-toggle="tab" data-bs-target="#ca" type="button" role="tab" aria-controls="ca" aria-selected="false">CANADA</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="uk-tab" data-bs-toggle="tab" data-bs-target="#uk" type="button" role="tab" aria-controls="uk" aria-selected="false">UK</button>
+                    </li>
+                  </ul>
+                  <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="us" role="tabpanel" aria-labelledby="us-tab">
+                        <div class="row modal-row">
+                            <div class="col">Sales Rank   : {{productDetailsUS.salesRank}}</div>
+                            <div class="col">Satış Fiyatı : {{productDetailsUS.salePrice}}</div>
+                            <div class="col">Amazon Fee   : {{productDetailsUS.salesRank}}</div>
+                            <div class="col">P&P Fee      : {{productDetailsUS.salesRank}}</div>
+                            <div class="col">Kar          : {{productDetailsUS.profit}}</div>
+                            <div class="col">Kar Yüzde    : {{productDetailsUS.profit_Percentage}}</div>
+                        </div>
+                        <div class="row modal-row">
+                            <div class="col">Satış Sayısı : {{productDetailsUS.sales_Count}}</div>
+                            <div class="col">Satıcı Sayısı : {{productDetailsUS.sellers_Count}}</div>
+                            <div class="col">Ağırlık : {{productDetailsUS.weigt}}</div>
+                            <div class="col">Boyut  : {{productDetailsUS.dimensions}}</div>
+                            <div class="col">Varyasyon Sayısı : {{productDetailsUS.variation_count}}</div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {{ chartUSLine|safe}}
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        {{ chartUSPieAmz|safe}}
+                                        <!--
+                                        <p style="margin-left: 70px;">Maximum Fiyat : XXX</p>
+                                        <p style="margin-left: 70px;">Ortalama Fiyat : XXX</p>
+                                        <p style="margin-left: 70px;">Minimum Fiyat : XXX</p>
+                                        -->
+                                    </div>
+                                    <div class="col">
+                                        {{ chartUSPieFba|safe}}
+                                        <!--
+                                        <p style="margin-left: 70px;">Maximum Fiyat : XXX</p>
+                                        <p style="margin-left: 70px;">Ortalama Fiyat : XXX</p>
+                                        <p style="margin-left: 70px;">Minimum Fiyat : XXX</p>
+                                    -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="ca" role="tabpanel" aria-labelledby="ca-tab">
+                        <div class="row modal-row">
+                            <div class="col">Sales Rank   : {{productDetailsCA.salesRank}}</div>
+                            <div class="col">Satış Fiyatı : {{productDetailsCA.salePrice}}</div>
+                            <div class="col">Amazon Fee   : {{productDetailsCA.salesRank}}</div>
+                            <div class="col">P&P Fee      : {{productDetailsCA.salesRank}}</div>
+                            <div class="col">Kar          : {{productDetailsCA.profit}}</div>
+                            <div class="col">Kar Yüzde    : {{productDetailsCA.profit_Percentage}}</div>
+                        </div>
+                        <div class="row modal-row">
+                            <div class="col">Satış Sayısı : {{productDetailsCA.sales_Count}}</div>
+                            <div class="col">Satıcı Sayısı : {{productDetailsCA.sellers_Count}}</div>
+                            <div class="col">Ağırlık : {{productDetailsCA.weigt}}</div>
+                            <div class="col">Boyut  : {{productDetailsCA.dimensions}}</div>
+                            <div class="col">Varyasyon Sayısı : {{productDetailsCA.variation_count}}</div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {{ chartCALine|safe}}
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        {{ chartCAPieAmz|safe}}
+                                        <!--
+                                        <p style="margin-left: 70px;">Maximum Fiyat : XXX</p>
+                                        <p style="margin-left: 70px;">Ortalama Fiyat : XXX</p>
+                                        <p style="margin-left: 70px;">Minimum Fiyat : XXX</p>
+                                        -->
+                                    </div>
+                                    <div class="col">
+                                        {{ chartCAPieFba|safe}}
+                                        <!--
+                                        <p style="margin-left: 70px;">Maximum Fiyat : XXX</p>
+                                        <p style="margin-left: 70px;">Ortalama Fiyat : XXX</p>
+                                        <p style="margin-left: 70px;">Minimum Fiyat : XXX</p>
+                                    -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="uk" role="tabpanel" aria-labelledby="uk-tab">
+                        <div class="row modal-row">
+                            <div class="col">Sales Rank   : {{productDetailsUK.salesRank}}</div>
+                            <div class="col">Satış Fiyatı : {{productDetailsUK.salePrice}}</div>
+                            <div class="col">Amazon Fee   : {{productDetailsUK.amazon_fee}}</div>
+                            <div class="col">P&P Fee      : {{productDetailsUK.pick_and_pack_fee}}</div>
+                            <div class="col">Kar          : {{productDetailsUK.profit}}</div>
+                            <div class="col">Kar Yüzde    : {{productDetailsUK.profit_Percentage}}</div>
+                        </div>
+                        <div class="row modal-row">
+                            <div class="col">Satış Sayısı : {{productDetailsUK.sales_Count}}</div>
+                            <div class="col">Satıcı Sayısı : {{productDetailsUK.sellers_Count}}</div>
+                            <div class="col">Ağırlık : {{productDetailsUK.weigt}}</div>
+                            <div class="col">Boyut  : {{productDetailsUK.dimensions}}</div>
+                            <div class="col">Varyasyon Sayısı : {{productDetailsUK.variation_count}}</div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {{ chartUKLine|safe}}
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        {{ chartUKPieAmz|safe}}
+                                        <!--
+                                        <p style="margin-left: 70px;">Maximum Fiyat : XXX</p>
+                                        <p style="margin-left: 70px;">Ortalama Fiyat : XXX</p>
+                                        <p style="margin-left: 70px;">Minimum Fiyat : XXX</p>
+                                        -->
+                                    </div>
+                                    <div class="col">
+                                        {{ chartUKPieFba|safe}}
+                                        <!--
+                                        <p style="margin-left: 70px;">Maximum Fiyat : XXX</p>
+                                        <p style="margin-left: 70px;">Ortalama Fiyat : XXX</p>
+                                        <p style="margin-left: 70px;">Minimum Fiyat : XXX</p>
+                                    -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+    </div>

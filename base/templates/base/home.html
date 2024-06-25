@@ -1,0 +1,198 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load extras %}
+
+{% block content %}
+
+
+    <div class="img-container" style="width: 100%; padding-top: 100px;">
+        <img style="width: 100%; height: auto;"  src="{% static 'images/warehouse.jpg'%}" alt="">
+        <div class="overlay">
+            <p>Explore Profitable Products & Deals</p>
+            <a class="btn btn-dark" href="#weakly-deals" role="button">Start Here!</a>
+        </div>
+    </div>
+    
+    <div>
+        <div class="bottom-banner-container">
+            <div class="bottom-banner-inner-container">
+                <h2>Minimum Order Value is $ 500</h2>
+                <p>Do not miss special deals!</p>
+                <p class="btn btn-light btn-small">Shop now</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="deals-banner-container" id="weakly-deals">
+        <div class="deals-banner-inner">
+            <div>
+                <h2>Deals of The Week</h2>
+            </div>
+            <div style="padding-top: 5px;">
+                <p>SPECIALLY SELECTED FROM OUR DISTRIBUTORS</p>
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+
+
+    <div class="deals-container" >
+        <div>
+            <div class="deals-header">
+                <h2>Weekly Wholesale Deals</h2>
+                <a  style="color: black; font-weight: bold;"href="">View All</a>
+            </div>
+        </div>
+        
+
+        <div class="deals-products">
+            <div class="deals-grid">
+
+                {% for product in products_with_deals %}
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="{% static product.image%}" alt="Card image cap">
+                        <div class="card-body">
+                        <p style="hyphens: auto;word-break: break-word; height: 150px;" class="card-text">{{product.title}}</p>
+                        <p class="asin">{{product.asin}}</p>
+                        <div class="grid-price">
+                            <span class="grid-product-price">
+                                <span hidewlm>
+                                    ${% sub_values_get_int  product.price product.deal %}
+                                    <sup>{% sub_values_get_float  product.price product.deal %}</sup>
+                                </span>
+                            </span>
+                            <span class="grid-product-price-original">
+                                <span hidewlm>
+                                    ${{product.price|get_int}}
+                                    <sup>{{product.price|get_float}}</sup>
+                                </span>
+                            </span>
+                            <span class="grid-product-price-savings">
+                                <span>
+                                      
+                                    Save 
+                                    <span hidewlm>${{product.deal}}</span>
+                                </span>
+                            </span>
+
+                        </div>
+                    </div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+        </div>
+    </div>
+
+    <hr/>
+    
+    <div class="loc-deals">
+        <div>
+            <div style="margin-top: 100px;" class="deals-header">
+                <h2>SURE HUB: Your Global Partner in Wholesale</h2>
+            </div>
+        </div>
+        <div class="loc-grids">
+            <div class="loc-grid-item">
+                <div>
+                    <a class="grid-collection" href="">
+                        <img src="{% static 'images/us_deals.webp'%}" alt="">
+                    </a>
+                    <h2 style="margin-left: 50px;">US DEALS</h2>
+                </div>
+                
+            </div>
+            <div class="loc-grid-item">
+                <div>
+                    <a class="grid-collection" href="">
+                        <img src="{% static 'images/eu_deals.webp'%}" alt="">
+                    </a>
+                    <h2 style="margin-left: 50px;">EU DEALS</h2>
+                </div>
+            </div>
+            <div class="loc-grid-item">
+                <div>
+                    <a class="grid-collection" href="">
+                        <img src="{% static 'images/uk_deals.webp'%}" alt="">
+                    </a>
+                    <h2 style="margin-left: 50px;">UK DEALS</h2>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- 
+        <div class="service">
+        <div class="service-header">
+            <div class="service-title">
+                <h2>We provide a 5 star service!</h2>
+            </div>
+        </div>
+        <div class="service-item"></div>
+    </div>
+     -->
+
+    
+     <hr/>
+
+    <div class="deals-container">
+        <div>
+            <div style="justify-content: left; margin-left: 250px; margin-right: 250px;" class="deals-header">
+                <h2>Top Sellers</h2>
+                <a  style="color: black; font-weight: bold;"href="products">View All</a>
+            </div>
+        </div>
+        
+
+        <div class="deals-products">
+            <div class="deals-grid">
+                {% for product in products_without_deals %}
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="{% static product.image%}" alt="Card image cap">
+                        <div class="card-body">
+                        <p style="hyphens: auto;word-break: break-word; height: 150px;" class="card-text">{{product.title}}</p>
+                        <p class="asin">{{product.asin}}</p>
+                        <div class="grid-price">
+                            <span class="grid-product-price">
+                                <span hidewlm>
+                                    ${{product.price|get_int}}
+                                    <sup>{{product.price|get_float}}</sup>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="deals-container">
+        <div>
+            <div style="justify-content: center; margin-top: 100px;" class="deals-header">
+                <h2>Some of the brands we are working with</h2>
+            </div>
+        </div>
+        
+
+        <div class="deals-products">
+            <div class="deals-grid" style="justify-content: center;">
+                <div class="card" style="width: 15rem; border: 0; margin: 10px; margin-bottom: 20px;">
+                    <img class="card-img-top" src="{% static 'images/cerave.png'%}" alt="Card image cap">
+                </div>
+                <div class="card" style="width: 15rem; border: 0; margin: 10px; margin-bottom: 20px;">
+                    <img class="card-img-top" src="{% static 'images/olaplex.jpg'%}" alt="Card image cap">
+                </div>
+                
+                    
+                
+            </div>
+            
+        </div>
+    </div>
+
+
+{% endblock content%}
